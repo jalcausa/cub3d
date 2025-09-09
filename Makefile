@@ -34,7 +34,7 @@ clean:
 
 fclean:	clean
 	@${RM} ${NAME}
-	@rm -rf .libft/libft.a
+	@rm -rf $.libft/libft.a
 
 re: fclean all
 
