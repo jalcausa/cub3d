@@ -1,0 +1,43 @@
+NAME		= cub3d
+
+SRCS		= main.c
+
+OBJS		= ${SRCS:.c=.o}
+
+CC			= cc
+
+LIBS		= ./MLX42/build/libmlx42.a ./libft/libft.a -lglfw -lm -ldl -pthread
+
+#Linker flags
+LDFLAGS		= -L/opt/homebrew/lib -L/usr/local/lib
+
+# C PreProcessor Flags
+CPPFLAGS	= -I/opt/homebrew/include -I/usr/local/include -I./MLX42/include -I./libft
+
+CFLAGS		= -Wall -Wextra -Werror
+
+RM			= rm -f
+
+all: ${NAME}
+
+%.o: %.c
+	@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
+
+${NAME}: ${OBJS}
+	@make -s -C libft
+	@${CC} ${OBJS} ${LIBS} ${LDFLAGS} -o ${NAME}
+	@echo "cub3d compiled"
+
+clean:
+	@${RM} ${OBJS}
+
+fclean:	clean
+	@${RM} ${NAME}
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
+re: fclean all
+
+.PHONY: all clean fclean re
