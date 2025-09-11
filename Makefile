@@ -1,6 +1,7 @@
 NAME		= cub3d
 
-SRCS		= main.c
+SRCS		=	src/main.c				\
+				src/render/player.c
 
 OBJS		= ${SRCS:.c=.o}
 
@@ -12,7 +13,7 @@ LIBS		= ./MLX42/build/libmlx42.a ./libft/libft.a -lglfw -lm -ldl -pthread
 LDFLAGS		= -L/opt/homebrew/lib -L/usr/local/lib
 
 # C PreProcessor Flags
-CPPFLAGS	= -I/opt/homebrew/include -I/usr/local/include -I./MLX42/include -I./libft
+CPPFLAGS	= -I/opt/homebrew/include -I/usr/local/include -I./MLX42/include -I./libft -I ./inc
 
 CFLAGS		= -Wall -Wextra -Werror
 
