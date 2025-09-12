@@ -6,11 +6,19 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:27:45 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/11 19:58:29 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:42:59 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+double	ft_deg_to_rad(double deg)
+{
+	double	rad;
+
+	rad = deg * (M_PI / 180.0);
+	return (rad);
+}
 
 double	ft_get_player_angle(t_scene *scene)
 {

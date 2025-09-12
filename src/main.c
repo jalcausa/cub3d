@@ -6,21 +6,42 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/11 20:09:17 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/12 13:54:09 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+mod is a modifier that can change the position from where the ray is sent.
+Here it is 0 but we change it for detecting collisions
+*/
 void	ft_loop_handler(void *param)
 {
-	(void) param;
+	t_game	*info;
+	t_coll	coll;
+	int		i;
+	double	player_angle;
+	t_coord	mod;
+
+	mod.x = 0;
+	mod.y = 0;
+	info = (t_game *)param;
+	ft_redisplay(info);
+	player_angle = ft_deg_to_rad(info->player->angle);
+	i = 0;
+	while (i < WIDTH)
+	{
+		coll = ft_ray_caster(info, ft_rayangle(i, player_angle), mod);
+		ft_draw_col(info, WALL_H / coll.distance, i, &coll);
+		i++;
+	}
 }
 
 void	ft_init_game(t_game *info)
 {
 	ft_init_player(info->player, info);
-	//mlx_key_hook(info->mlx, &ft_controls, info);
+	mlx_key_hook(info->mlx, &ft_controls, info);
 	mlx_loop_hook(info->mlx, &ft_loop_handler, info);
 	mlx_loop(info->mlx);
 }
@@ -58,19 +79,14 @@ int	main(void)
 	t_scene		scene;
 	t_player	player;
 	t_img		imgs;
-
-	// Inicializar todo a cero
-	ft_memset(&scene, 0, sizeof(t_scene));
-	ft_memset(&player, 0, sizeof(t_player));
-	ft_memset(&imgs, 0, sizeof(t_img));
 	
 	// Crear un mapa de prueba simple
 	static char *test_map[] = {
 		"111111",
-		"1N0001",
 		"100001",
-		"100001",
-		"100001",
+		"10N001",
+		"101101",
+		"100101",
 		"111111",
 		NULL
 	};
@@ -79,6 +95,9 @@ int	main(void)
 	scene.map = test_map;
 	scene.len_x = 6;
 	scene.len_y = 6;
+	scene.tile = 10.0;  // Tamaño de cada celda del mapa
+	scene.floor = 0x654321FF;    // Color marrón para el suelo
+	scene.ceiling = 0x87CEEBFF;  // Color azul cielo para el techo
 	
 	// Asignar punteros
 	info.scene = &scene;
