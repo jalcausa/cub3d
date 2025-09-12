@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaperalt <yaperalt@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:18:05 by yaperalt          #+#    #+#             */
-/*   Updated: 2025/01/28 21:57:21 by yaperalt         ###   ########.fr       */
+/*   Updated: 2025/09/12 06:06:21 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include <signal.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+//gnl
+char	*get_next_line(int fd);
 
 // Libc
-
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
