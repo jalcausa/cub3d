@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:55:01 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/12 13:39:14 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:44:00 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,7 @@ t_coord	ft_first_step(t_ray *ray, char cross, double angle, t_game *info)
 t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross)
 {
 	t_coord	pos;
-	t_coord	cateto;
 	t_coll	coll;
-	double	distance;
-
-	(void)cateto;   // Suprimir advertencia
-	(void)distance; // Suprimir advertencia
-	
-	// Inicializar toda la estructura a cero
-	ft_memset(&coll, 0, sizeof(t_coll));
 	
 	pos = ft_first_step(ray, cross, ray->angle, info);
 	while (1)
@@ -95,10 +87,10 @@ t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross)
 	return (coll);
 }
 
-void	ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord mod)
+void	ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord *mod)
 {
-	ray->origin.x = info->player->pos->x + mod.x;
-	ray->origin.y = info->player->pos->y + mod.y;
+	ray->origin.x = info->player->pos.x + mod->x;
+	ray->origin.y = info->player->pos.y + mod->y;
 	ray->deltaang = ft_deg_to_rad(info->player->angle) - angle;
 	ray->angle = angle;
 	ray->dir.x = cos(angle);
@@ -115,16 +107,12 @@ void	ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord mod)
 	ray->y_cross.y = tan(angle) * ray->sgn.x;
 }
 
-t_coll	ft_ray_caster(t_game *info, float angle, t_coord mod)
+t_coll	ft_ray_caster(t_game *info, float angle, t_coord *mod)
 {
 	t_coll	x_coll;
 	t_coll	y_coll;
 	t_ray	ray;
-	int		i;
-	int		j;
 
-	(void)i; // Suprimir advertencia
-	(void)j; // Suprimir advertencia
 	ft_init_ray(&ray, info, ft_deg_to_rad(angle), mod);
 	x_coll = ft_cross_checker(&ray, ray.x_cross, info, 'x');
 	y_coll = ft_cross_checker(&ray, ray.y_cross, info, 'y');

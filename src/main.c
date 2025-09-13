@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/12 13:54:09 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:44:41 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /*
 mod is a modifier that can change the position from where the ray is sent.
-Here it is 0 but we change it for detecting collisions
 */
 void	ft_loop_handler(void *param)
 {
@@ -32,7 +31,7 @@ void	ft_loop_handler(void *param)
 	i = 0;
 	while (i < WIDTH)
 	{
-		coll = ft_ray_caster(info, ft_rayangle(i, player_angle), mod);
+		coll = ft_ray_caster(info, ft_rayangle(i, player_angle), &mod);
 		ft_draw_col(info, WALL_H / coll.distance, i, &coll);
 		i++;
 	}
@@ -99,15 +98,39 @@ int	main(void)
 	scene.floor = 0x654321FF;    // Color marrón para el suelo
 	scene.ceiling = 0x87CEEBFF;  // Color azul cielo para el techo
 	
+	// Rutas de texturas
+	scene.no_path = "/Users/jalcausa/Documents/42/cub3d/textures/bluestone.png";
+	scene.so_path = "/Users/jalcausa/Documents/42/cub3d/textures/greystone.png"; 
+	scene.ea_path = "/Users/jalcausa/Documents/42/cub3d/textures/purplestone.png";
+	scene.we_path = "/Users/jalcausa/Documents/42/cub3d/textures/redbrick.png";
+	
 	// Asignar punteros
 	info.scene = &scene;
 	info.player = &player;
 	info.imgs = &imgs;
 	
-	if (ft_set_window(&info) != -1)
+	// Primero inicializar MLX
+	if (ft_set_window(&info) == -1)
 	{
-		ft_init_game(&info);
-		mlx_terminate(info.mlx);
+		ft_printf("Error: No se pudo inicializar la ventana\n");
+		return (-1);
 	}
+
+	// Luego cargar texturas
+	if (ft_load_images(&scene, &imgs) == -1)
+	{
+		ft_printf("Error: No se pudieron cargar las texturas\n");
+		ft_printf("Verificar que existan los archivos:\n");
+		ft_printf("- %s\n", scene.no_path);
+		ft_printf("- %s\n", scene.so_path);
+		ft_printf("- %s\n", scene.ea_path);
+		ft_printf("- %s\n", scene.we_path);
+		mlx_terminate(info.mlx);
+		return (-1);
+	}
+	
+	// Finalmente inicializar el juego
+	ft_init_game(&info);
+	mlx_terminate(info.mlx);
 	return (0);
 }

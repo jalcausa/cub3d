@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
-/*   Updated: 2025/09/12 13:34:45 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:44:00 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_scene
 typedef struct s_player
 {
 	mlx_t		*mlx;
-	t_coord		*pos;
+	t_coord		pos;		// Cambiar de puntero a valor directo
 	double		mov_speed;
 	double		rot_speed;
 	int			angle;
@@ -135,8 +135,8 @@ double	ft_deg_to_rad(double deg);
 // raycast.c
 t_coord	ft_first_step(t_ray *ray, char cross, double angle, t_game *info);
 t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross);
-void	ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord mod);
-t_coll	ft_ray_caster(t_game *info, float angle, t_coord mod);
+void	ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord *mod);
+t_coll	ft_ray_caster(t_game *info, float angle, t_coord *mod);
 double	ft_rayangle(int i, double angle);
 bool	ft_coll_checker(t_coord pos, t_ray *ray, t_game *info, char cross);
 
@@ -147,13 +147,17 @@ void	ft_draw_col(t_game	*info, float wall, int col, t_coll *coll);
 
 // UTILS
 // controls.c
-int	ft_collision(t_game *game, double new_x, double new_y);
+int		ft_collision(t_game *game, double new_x, double new_y);
 void	ft_ws(t_player *player, double dir, t_game *game, float angle);
 void	ft_ad(t_player *player, double dir, double ang, t_game *game);
 void	ft_rotate(t_player *player, double sign, t_game *game);
 void	ft_controls(mlx_key_data_t keydata, void *param);
 
 // images.c
-void	ft_redisplay(t_game *game);
+void			ft_redisplay(t_game *game);
+int				ft_load_images(t_scene *scene, t_img *imgs);
+unsigned long	ft_get_pixel_color(mlx_texture_t *txt, int y, int x, int size);
+void			ft_draw_pixel(t_game *game);
+void			ft_init_pixel(t_coll *coll, int wall, t_game *info);
 
 #endif

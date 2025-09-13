@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:58:51 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/12 14:08:22 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:04:47 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,20 @@
 void	ft_draw_wall(t_game *info, t_coll *coll, int col, int j)
 {
 	unsigned long	color;
+	float			y;
+	int				x;
 
-	// Diferentes colores según la orientación de la pared
-	if (coll->txt == 1)
-		color = 0xFF0000FF;      // Rojo - Este
-	else if (coll->txt == -1) 
-		color = 0x00FF00FF;      // Verde - Oeste
-	else if (coll->txt == 2)
-		color = 0x0000FFFF;      // Azul - Sur  
-	else if (coll->txt == -2)
-		color = 0xFFFF00FF;      // Amarillo - Norte
-	else
-		color = 0x8B4513FF;      // Marrón por defecto
-
-	while (j < HEIGHT / 2 + coll->wall / 2)
+	y = coll->pixel.y;
+	x = (int)coll->pixel.x;
+	while ((uint32_t)y < coll->texture->height && j < HEIGHT / 2 + coll->wall / 2)
 	{
+		color = \
+		ft_get_pixel_color(coll->texture, (int)y, x, coll->texture->width);
 		if (j < 0 || j > HEIGHT)
 			break ;
 		mlx_put_pixel(info->scene->canvas, col, j, color);
 		j++;
+		y += coll->ratio;
 	}
 }
 
@@ -50,8 +45,8 @@ void	ft_draw_col(t_game	*info, float wall, int col, t_coll *coll)
 	if (bot > HEIGHT)
 		bot = HEIGHT;
 		
-	// Asignar altura de pared a la estructura coll para ft_draw_wall
-	coll->wall = wall;
+	// Inicializar pixel data para texturas
+	ft_init_pixel(coll, wall, info);
 	
 	j = 0;
 	while (j < HEIGHT)

@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:27:45 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/12 11:42:59 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:40:36 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,7 @@ t_coord	ft_get_player_init_pos(t_game *game)
 void	ft_init_player(t_player *player, t_game *game)
 {
 	player->mlx = game->mlx;
-	player->pos = malloc(sizeof(t_coord));
-	if (!player->pos)
-	{
-		ft_printf("Error: malloc failed for player position\n");
-		return ;
-	}
-	*player->pos = ft_get_player_init_pos(game);
+	player->pos = ft_get_player_init_pos(game);		// Asignación directa, sin malloc
 	player->mov_speed = 0.5;
 	player->rot_speed = 2.0;
 	player->angle = ft_get_player_angle(game->scene);

@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 11:29:56 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/12 13:29:50 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:40:36 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	ft_ws(t_player *player, double dir, t_game *game, float angle)
 	(void)angle; // Suprimir advertencia de parámetro no usado
 	
 	// Calcular nueva posición
-	new_x = player->pos->x + (dir * cos(ft_deg_to_rad(player->angle)) * player->mov_speed) / game->scene->tile;
-	new_y = player->pos->y + (dir * sin(ft_deg_to_rad(player->angle)) * player->mov_speed) / game->scene->tile;
+	new_x = player->pos.x + (dir * cos(ft_deg_to_rad(player->angle)) * player->mov_speed) / game->scene->tile;
+	new_y = player->pos.y + (dir * sin(ft_deg_to_rad(player->angle)) * player->mov_speed) / game->scene->tile;
 	
 	// Solo mover si no hay colisión
 	if (!ft_collision(game, new_x, new_y))
 	{
-		player->pos->x = new_x;
-		player->pos->y = new_y;
+		player->pos.x = new_x;
+		player->pos.y = new_y;
 	}
 }
 
@@ -63,14 +63,14 @@ void	ft_ad(t_player *player, double dir, double ang, t_game *game)
 	rot = player->angle + ang;
 	
 	// Calcular nueva posición
-	new_x = player->pos->x + (cos(ft_deg_to_rad(rot)) * player->mov_speed) / game->scene->tile;
-	new_y = player->pos->y + (sin(ft_deg_to_rad(rot)) * player->mov_speed) / game->scene->tile;
+	new_x = player->pos.x + (cos(ft_deg_to_rad(rot)) * player->mov_speed) / game->scene->tile;
+	new_y = player->pos.y + (sin(ft_deg_to_rad(rot)) * player->mov_speed) / game->scene->tile;
 	
 	// Solo mover si no hay colisión
 	if (!ft_collision(game, new_x, new_y))
 	{
-		player->pos->x = new_x;
-		player->pos->y = new_y;
+		player->pos.x = new_x;
+		player->pos.y = new_y;
 	}
 }
 
