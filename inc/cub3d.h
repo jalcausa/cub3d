@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
-/*   Updated: 2025/09/11 19:48:44 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 13:32:50 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_ray
 typedef struct s_coll
 {
 	t_coord			collision;
-	double			raylen;
+	double			raylen;  
 	double			distance;
 	int				txt;
 	mlx_texture_t	*texture;
@@ -120,6 +120,11 @@ typedef enum e_errors
 	WINDOW,
 	IMAGE,
 }		t_errors;
+
+// PARSER
+// parse.c
+
+// read_map.c
 
 // RENDER
 // player.c
