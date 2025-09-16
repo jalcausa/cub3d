@@ -6,21 +6,41 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/11 20:09:17 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/13 20:44:41 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+mod is a modifier that can change the position from where the ray is sent.
+*/
 void	ft_loop_handler(void *param)
 {
-	(void) param;
+	t_game	*info;
+	t_coll	coll;
+	int		i;
+	double	player_angle;
+	t_coord	mod;
+
+	mod.x = 0;
+	mod.y = 0;
+	info = (t_game *)param;
+	ft_redisplay(info);
+	player_angle = ft_deg_to_rad(info->player->angle);
+	i = 0;
+	while (i < WIDTH)
+	{
+		coll = ft_ray_caster(info, ft_rayangle(i, player_angle), &mod);
+		ft_draw_col(info, WALL_H / coll.distance, i, &coll);
+		i++;
+	}
 }
 
 void	ft_init_game(t_game *info)
 {
 	ft_init_player(info->player, info);
-	//mlx_key_hook(info->mlx, &ft_controls, info);
+	mlx_key_hook(info->mlx, &ft_controls, info);
 	mlx_loop_hook(info->mlx, &ft_loop_handler, info);
 	mlx_loop(info->mlx);
 }
@@ -58,19 +78,14 @@ int	main(void)
 	t_scene		scene;
 	t_player	player;
 	t_img		imgs;
-
-	// Inicializar todo a cero
-	ft_memset(&scene, 0, sizeof(t_scene));
-	ft_memset(&player, 0, sizeof(t_player));
-	ft_memset(&imgs, 0, sizeof(t_img));
 	
 	// Crear un mapa de prueba simple
 	static char *test_map[] = {
 		"111111",
-		"1N0001",
 		"100001",
-		"100001",
-		"100001",
+		"10N001",
+		"101101",
+		"100101",
 		"111111",
 		NULL
 	};
@@ -79,16 +94,43 @@ int	main(void)
 	scene.map = test_map;
 	scene.len_x = 6;
 	scene.len_y = 6;
+	scene.tile = 10.0;  // Tamaño de cada celda del mapa
+	scene.floor = 0x654321FF;    // Color marrón para el suelo
+	scene.ceiling = 0x87CEEBFF;  // Color azul cielo para el techo
+	
+	// Rutas de texturas
+	scene.no_path = "/Users/jalcausa/Documents/42/cub3d/textures/bluestone.png";
+	scene.so_path = "/Users/jalcausa/Documents/42/cub3d/textures/greystone.png"; 
+	scene.ea_path = "/Users/jalcausa/Documents/42/cub3d/textures/purplestone.png";
+	scene.we_path = "/Users/jalcausa/Documents/42/cub3d/textures/redbrick.png";
 	
 	// Asignar punteros
 	info.scene = &scene;
 	info.player = &player;
 	info.imgs = &imgs;
 	
-	if (ft_set_window(&info) != -1)
+	// Primero inicializar MLX
+	if (ft_set_window(&info) == -1)
 	{
-		ft_init_game(&info);
-		mlx_terminate(info.mlx);
+		ft_printf("Error: No se pudo inicializar la ventana\n");
+		return (-1);
 	}
+
+	// Luego cargar texturas
+	if (ft_load_images(&scene, &imgs) == -1)
+	{
+		ft_printf("Error: No se pudieron cargar las texturas\n");
+		ft_printf("Verificar que existan los archivos:\n");
+		ft_printf("- %s\n", scene.no_path);
+		ft_printf("- %s\n", scene.so_path);
+		ft_printf("- %s\n", scene.ea_path);
+		ft_printf("- %s\n", scene.we_path);
+		mlx_terminate(info.mlx);
+		return (-1);
+	}
+	
+	// Finalmente inicializar el juego
+	ft_init_game(&info);
+	mlx_terminate(info.mlx);
 	return (0);
 }

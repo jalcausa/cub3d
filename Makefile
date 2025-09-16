@@ -1,7 +1,11 @@
-NAME		= cub3d
+NAME		= cub3D
 
 SRCS		=	src/main.c				\
-				src/render/player.c
+				src/render/player.c		\
+				src/render/paint.c		\
+				src/render/raycast.c	\
+				src/utils/controls.c	\
+				src/utils/images.c
 
 OBJS		= ${SRCS:.c=.o}
 
