@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:18:05 by yaperalt          #+#    #+#             */
-/*   Updated: 2025/09/22 10:46:32 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/22 11:16:40 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		ft_isspace(int c);
 int		ft_arrlen(char **arr);
 void	ft_free_double_pointer(char **ptr);
+char	**ft_old_split(char const *s, char c);
 
 
 #endif
