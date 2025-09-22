@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
 /*   Updated: 2025/09/22 13:40:07 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/17 13:16:55 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +73,7 @@ typedef struct s_scene
 typedef struct s_player
 {
 	mlx_t		*mlx;
-	t_coord		pos;		// Cambiar de puntero a valor directo
+	t_coord		pos;
 	double		mov_speed;
 	double		rot_speed;
 	int			angle;

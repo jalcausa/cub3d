@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:58:51 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/13 20:04:47 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/17 13:35:10 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,25 @@ void	ft_draw_wall(t_game *info, t_coll *coll, int col, int j)
 	unsigned long	color;
 	float			y;
 	int				x;
+	int             end;
 
 	y = coll->pixel.y;
 	x = (int)coll->pixel.x;
-	while ((uint32_t)y < coll->texture->height && j < HEIGHT / 2 + coll->wall / 2)
+	// Limitar el final de la columna dentro de la pantalla
+	end = HEIGHT / 2 + coll->wall / 2;
+	if (end > HEIGHT)
+		end = HEIGHT;
+	if (j < 0)
+		j = 0;
+	while ((uint32_t)y < coll->texture->height && j < end)
 	{
-		color = \
-		ft_get_pixel_color(coll->texture, (int)y, x, coll->texture->width);
-		if (j < 0 || j > HEIGHT)
-			break ;
+		// Seguridad adicional en índices de textura
+		color = ft_get_pixel_color(coll->texture, (int)y, x, coll->texture->width);
+		// Comprobaciones estrictas de límites de pantalla
+		if (col < 0 || col >= WIDTH)
+			break;
+		if (j < 0 || j >= HEIGHT)
+			break;
 		mlx_put_pixel(info->scene->canvas, col, j, color);
 		j++;
 		y += coll->ratio;
