@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:42:47 by yz                #+#    #+#             */
-/*   Updated: 2025/09/22 17:15:57 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 12:07:19 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	ft_get_max_len(char **matrix, int j)
 int	ft_get_map(char **file, t_scene *scene, int j)
 {
 	int		len;
-	char	**cpy;
 
 	if (!(scene->no_path && scene->so_path && scene->we_path
 			&& scene->ea_path && scene->f_color && scene->c_color))
@@ -114,14 +113,12 @@ int	ft_get_map(char **file, t_scene *scene, int j)
 int	ft_parse_file(t_scene *scene)
 {
 	int	j;
-	int	i;
 	int	ret;
 
 	j = -1;
 	ret = 0;
 	while (scene->file[j] && scene->file[++j])
 	{
-		i = 0;
 		while (scene->file[j][0] == 10)
 			j++;
 		ret = ft_save_info(scene, scene->file[j]);

@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:42:07 by yz                #+#    #+#             */
-/*   Updated: 2025/09/22 17:15:42 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 12:01:36 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,10 @@ int	ft_get_colour(char **rgb)
 */
 int	ft_color_check(char *color)
 {
-	int		i;
-	int		cont;
 	int		ret;
 	char	**rgb;
 
 	ret = 0;
-	i = 0;
 
 	if (ft_char_counter(color, ',') > 2)
 		return (-1);
