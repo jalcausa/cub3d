@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 11:59:50 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 16:35:29 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,8 @@ void			ft_init_pixel(t_coll *coll, int wall, t_game *info);
 void			ft_parse_errors(int err, char *str);
 void			ft_mlx_errors(int err, char *str);
 int				ft_error(int err, char *str);
+
+// clean.c
+void	ft_clean_map(t_game	*info);
 
 #endif
