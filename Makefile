@@ -14,7 +14,8 @@ SRCS = src/main.c \
 	src/render/raycast.c \
 	src/utils/controls.c \
 	src/utils/handle_errors.c \
-	src/utils/images.c
+	src/utils/images.c \
+	src/utils/clean.c
 
 OBJS		= ${SRCS:.c=.o}
 
