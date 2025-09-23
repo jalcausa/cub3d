@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:42:47 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 12:07:19 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 17:51:57 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,20 @@ int	ft_parse_file(t_scene *scene)
 	int	j;
 	int	ret;
 
-	j = -1;
+	j = 0;
 	ret = 0;
-	while (scene->file[j] && scene->file[++j])
+	while (scene->file[j])
 	{
-		while (scene->file[j][0] == 10)
+		while (scene->file[j] && scene->file[j][0] == 10)
 			j++;
+		if (!scene->file[j])
+			break;
 		ret = ft_save_info(scene, scene->file[j]);
 		if (ret == 1)
 			break ;
 		if (ret == -1)
 			return (-1);
+		j++;
 	}
 	ret = ft_get_map(scene->file, scene, j);
 	return (ret);

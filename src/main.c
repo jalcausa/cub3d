@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/23 16:33:23 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 17:56:02 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ int	main(int argc, char **argv)
 	t_img		imgs;
 	int			fd;
 
+	// Initialize info structure properly
+	info.scene = NULL;
+	info.player = NULL;
+	info.imgs = NULL;
+	info.mlx = NULL;
+
+	// Initialize imgs structure
+	imgs.no_text = NULL;
+	imgs.so_text = NULL;
+	imgs.we_text = NULL;
+	imgs.ea_text = NULL;
+
 	fd = ft_arg_check(argc, argv);
 	if (fd < 0)
 		return (-1);
@@ -93,7 +105,7 @@ int	main(int argc, char **argv)
 			ft_init_game(&info);
 			mlx_terminate(info.mlx);
 		}
+		ft_clean_map(&info);
 	}
-	ft_clean_map(&info);	
 	return (0);
 }

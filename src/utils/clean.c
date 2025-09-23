@@ -6,14 +6,31 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:34:42 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 16:35:08 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/23 17:57:46 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+static void	ft_clean_images(t_game *info)
+{
+	if (info->imgs)
+	{
+		if (info->imgs->no_text)
+			mlx_delete_texture(info->imgs->no_text);
+		if (info->imgs->so_text)
+			mlx_delete_texture(info->imgs->so_text);
+		if (info->imgs->we_text)
+			mlx_delete_texture(info->imgs->we_text);
+		if (info->imgs->ea_text)
+			mlx_delete_texture(info->imgs->ea_text);
+	}
+}
+
 void	ft_clean_map(t_game	*info)
 {
+	if (!info)
+		return;
 	if (info->scene)
 	{
 		if (info->scene->map)
@@ -31,5 +48,5 @@ void	ft_clean_map(t_game	*info)
 		if (info->scene->c_color)
 			free(info->scene->c_color);
 	}
-	exit(0);
+	ft_clean_images(info);
 }
