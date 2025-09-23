@@ -17,7 +17,8 @@ SRCS = src/main.c \
 	src/utils/images.c \
 	src/utils/clean.c
 
-OBJS		= ${SRCS:.c=.o}
+OBJ_DIR		= Objects
+OBJS		= $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
@@ -39,7 +40,8 @@ endif
 
 all: ${NAME}
 
-%.o: %.c
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
@@ -48,7 +50,7 @@ ${NAME}: ${OBJS}
 	@echo "cub3D compiled"
 
 clean:
-	@${RM} ${OBJS}
+	@${RM} -r ${OBJ_DIR}
 	@make clean -C ./libft
 
 fclean:	clean
