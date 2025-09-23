@@ -1,3 +1,9 @@
+# ANSI color codes
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+RED = \033[0;31m
+RESET = \033[0m
+
 NAME		= cub3D
 
 SRCS = src/main.c \
@@ -41,22 +47,32 @@ endif
 all: ${NAME}
 
 $(OBJ_DIR)/%.o: src/%.c
+	@echo "$(YELLOW)Compiling: $<$(RESET)"
 	@mkdir -p $(dir $@)
 	@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
+	@echo "$(YELLOW)Building libft...$(RESET)"
 	@make -s -C libft
+	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
 	@${CC} ${OBJS} ${LIBS} ${LDFLAGS} -o ${NAME}
-	@echo "cub3D compiled"
+	@echo "$(GREEN)✓ $(NAME) compiled successfully!$(RESET)"
 
 clean:
+	@echo "$(RED)Cleaning object files...$(RESET)"
 	@${RM} -r ${OBJ_DIR}
 	@make clean -C ./libft
+	@echo "$(GREEN)✓ Object files cleaned$(RESET)"
 
 fclean:	clean
+	@echo "$(RED)Removing executable...$(RESET)"
 	@${RM} ${NAME}
 	@${RM} ./libft/libft.a
+	@echo "$(GREEN)✓ Full clean completed$(RESET)"
 
-re: fclean all
+re: 
+	@echo "$(YELLOW)Rebuilding $(NAME)...$(RESET)"
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: all clean fclean re
