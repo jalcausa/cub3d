@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/17 13:28:31 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/23 16:33:23 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,65 +72,28 @@ int	ft_set_window(t_game *info)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game		info;
 	t_scene		scene;
 	t_player	player;
 	t_img		imgs;
-	
-	// Crear un mapa de prueba simple
-	static char *test_map[] = {
-		"111111",
-		"100001",
-		"10S001",
-		"101101",
-		"100101",
-		"111111",
-		NULL
-	};
-	
-	// Inicializar scene con valores de prueba
-	scene.map = test_map;
-	scene.len_x = 6;
-	scene.len_y = 6;
-	scene.tile = 10.0;  // Tamaño de cada celda del mapa
-	scene.floor = 0x654321FF;    // Color marrón para el suelo
-	scene.ceiling = 0x87CEEBFF;  // Color azul cielo para el techo
-	
-	// Rutas de texturas
-	scene.no_path = "/Users/jalcausa/Documents/42/cub3d/textures/bluestone.png";
-	scene.so_path = "/Users/jalcausa/Documents/42/cub3d/textures/greystone.png"; 
-	scene.ea_path = "/Users/jalcausa/Documents/42/cub3d/textures/purplestone.png";
-	scene.we_path = "/Users/jalcausa/Documents/42/cub3d/textures/redbrick.png";
-	
-	// Asignar punteros
-	info.scene = &scene;
-	info.player = &player;
-	info.imgs = &imgs;
-	
-	// Primero inicializar MLX
-	if (ft_set_window(&info) == -1)
-	{
-		ft_printf("Error: No se pudo inicializar la ventana\n");
-		return (-1);
-	}
+	int			fd;
 
-	// Luego cargar texturas
-	if (ft_load_images(&scene, &imgs) == -1)
-	{
-		ft_printf("Error: No se pudieron cargar las texturas\n");
-		ft_printf("Verificar que existan los archivos:\n");
-		ft_printf("- %s\n", scene.no_path);
-		ft_printf("- %s\n", scene.so_path);
-		ft_printf("- %s\n", scene.ea_path);
-		ft_printf("- %s\n", scene.we_path);
-		mlx_terminate(info.mlx);
+	fd = ft_arg_check(argc, argv);
+	if (fd < 0)
 		return (-1);
+	if (ft_parse(&scene, fd, argv[1], &imgs) != -1)
+	{
+		info.scene = &scene;
+		info.player = &player;
+		info.imgs = &imgs;
+		if (ft_set_window(&info) != -1)
+		{
+			ft_init_game(&info);
+			mlx_terminate(info.mlx);
+		}
 	}
-	
-	// Finalmente inicializar el juego
-	ft_init_game(&info);
-	mlx_terminate(info.mlx);
+	ft_clean_map(&info);	
 	return (0);
 }
