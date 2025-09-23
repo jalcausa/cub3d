@@ -1,0 +1,9 @@
+# Ignore rules for the project
+MLX42/build/
+*.DS_Store
+*.vscode/
+*.o
+*.exe
+*.out
+*.a
+cub3D
