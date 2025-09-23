@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:27:45 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/17 13:16:32 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/23 19:01:10 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_init_player(t_player *player, t_game *game)
 {
 	player->mlx = game->mlx;
 	player->pos = ft_get_player_init_pos(game);
-	player->mov_speed = 0.5;
-	player->rot_speed = 2.0;
+	player->mov_speed = 5.0;
+	player->rot_speed = 5.0;
 	player->angle = ft_get_player_angle(game->scene);
 }
