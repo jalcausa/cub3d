@@ -6,10 +6,10 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
-/*   Updated: 2025/09/22 13:40:07 by yz               ###   ########.fr       */
-/*   Updated: 2025/09/17 13:16:55 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/23 11:59:50 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -182,7 +182,6 @@ void			ft_draw_pixel(t_game *game);
 void			ft_init_pixel(t_coll *coll, int wall, t_game *info);
 
 //handle_errors.c
-static void		ft_print_fileformat(char *str);
 void			ft_parse_errors(int err, char *str);
 void			ft_mlx_errors(int err, char *str);
 int				ft_error(int err, char *str);
