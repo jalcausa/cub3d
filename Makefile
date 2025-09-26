@@ -18,10 +18,12 @@ SRCS = src/main.c \
 	src/render/paint.c \
 	src/render/player.c \
 	src/render/raycast.c \
+	src/render/raycast_utils.c \
 	src/utils/controls.c \
 	src/utils/handle_errors.c \
 	src/utils/images.c \
-	src/utils/clean.c
+	src/utils/clean.c \
+	src/init.c
 
 OBJ_DIR		= Objects
 OBJS		= $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
