@@ -6,14 +6,15 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:42:47 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 17:51:57 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:30:13 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /* 
- * Extracts the relevant info from a line, skipping leading spaces and the identifier.
+ * Extracts the relevant info from a line, skipping leading spaces and the
+ * identifier.
  * Frees the previous path if it exists and returns the trimmed value.
  * For example: from "NO ./path" returns "./path".
  */
@@ -95,7 +96,7 @@ int	ft_get_map(char **file, t_scene *scene, int j)
 
 	if (!(scene->no_path && scene->so_path && scene->we_path
 			&& scene->ea_path && scene->f_color && scene->c_color))
-		return (ft_error(FORMAT, "All six parameter must appear above the map"));
+		return (ft_error(FORMAT, "All six parameter above the map"));
 	len = 0;
 	while (file[j + len])
 		len++;
@@ -122,7 +123,7 @@ int	ft_parse_file(t_scene *scene)
 		while (scene->file[j] && scene->file[j][0] == 10)
 			j++;
 		if (!scene->file[j])
-			break;
+			break ;
 		ret = ft_save_info(scene, scene->file[j]);
 		if (ret == 1)
 			break ;

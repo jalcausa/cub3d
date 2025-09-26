@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:27:45 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/23 19:01:10 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:41:25 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ double	ft_get_player_angle(t_scene *scene)
 	return (-1);
 }
 
-
-/*
-The player is positioned in the middle of the cell, that's why we add 0.5 to the coordenates
-*/
 t_coord	ft_get_player_init_pos(t_game *game)
 {
 	t_coord	pos;

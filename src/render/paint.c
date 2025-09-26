@@ -3,46 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   paint.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:58:51 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/17 13:35:10 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:25:53 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_get_wall_end(int wall)
+{
+	int	end;
+
+	end = HEIGHT / 2 + wall / 2;
+	if (end > HEIGHT)
+		end = HEIGHT;
+	return (end);
+}
 
 void	ft_draw_wall(t_game *info, t_coll *coll, int col, int j)
 {
 	unsigned long	color;
 	float			y;
 	int				x;
-	int             end;
+	int				end;
 
 	y = coll->pixel.y;
 	x = (int)coll->pixel.x;
-	// Limitar el final de la columna dentro de la pantalla
-	end = HEIGHT / 2 + coll->wall / 2;
-	if (end > HEIGHT)
-		end = HEIGHT;
+	end = ft_get_wall_end(coll->wall);
 	if (j < 0)
 		j = 0;
 	while ((uint32_t)y < coll->texture->height && j < end)
 	{
-		// Seguridad adicional en índices de textura
-		color = ft_get_pixel_color(coll->texture, (int)y, x, coll->texture->width);
-		// Comprobaciones estrictas de límites de pantalla
+		color = ft_get_pixel_color(coll->texture, (int)y, x,
+				coll->texture->width);
 		if (col < 0 || col >= WIDTH)
-			break;
+			break ;
 		if (j < 0 || j >= HEIGHT)
-			break;
+			break ;
 		mlx_put_pixel(info->scene->canvas, col, j, color);
 		j++;
 		y += coll->ratio;
 	}
 }
 
-void	ft_draw_col(t_game	*info, float wall, int col, t_coll *coll)
+void	ft_draw_col(t_game *info, float wall, int col, t_coll *coll)
 {
 	int	j;
 	int	top;
@@ -54,10 +60,7 @@ void	ft_draw_col(t_game	*info, float wall, int col, t_coll *coll)
 	bot = top + wall;
 	if (bot > HEIGHT)
 		bot = HEIGHT;
-		
-	// Inicializar pixel data para texturas
 	ft_init_pixel(coll, wall, info);
-	
 	j = 0;
 	while (j < HEIGHT)
 	{

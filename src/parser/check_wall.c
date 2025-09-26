@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:43:08 by yz                #+#    #+#             */
-/*   Updated: 2025/09/22 17:21:22 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:30:32 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	ft_wall_check(char **map, t_scene *scene)
 		{
 			while (map[y][x] > 0 && map[y][x] <= 32)
 				x++;
-			if (map[y][x] != 0 && ft_is_wall(map, x, y, scene) \
-			&& map[y][x] != '1')
+			if (map[y][x] != 0 && ft_is_wall(map, x, y, scene)
+				&& map[y][x] != '1')
 				return (-1);
 			x++;
 		}

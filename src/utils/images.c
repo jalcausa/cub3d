@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   images.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 11:38:42 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/13 20:31:32 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:23:39 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_draw_pixel(t_game *game)
 		x = 0;
 		while (x < game->imgs->size)
 		{
-			game->imgs->color_pix = \
-			ft_get_pixel_color(game->imgs->no_text, y, x, game->imgs->size);
+			game->imgs->color_pix = ft_get_pixel_color(game->imgs->no_text,
+					y, x, game->imgs->size);
 			mlx_put_pixel(canvas, x + 300, y + 300, game->imgs->color_pix);
 			x++;
 		}
@@ -80,25 +80,25 @@ int	ft_load_images(t_scene *scene, t_img *imgs)
 	imgs->no_text = mlx_load_png(scene->no_path);
 	if (!imgs->no_text)
 	{
-		// ft_error(IMAGE, NULL);
+		ft_error(IMAGE, NULL);
 		return (-1);
 	}
 	imgs->so_text = mlx_load_png(scene->so_path);
 	if (!imgs->so_text)
 	{
-		// ft_error(IMAGE, NULL);
+		ft_error(IMAGE, NULL);
 		return (-1);
 	}
 	imgs->we_text = mlx_load_png(scene->we_path);
 	if (!imgs->we_text)
 	{
-		// ft_error(IMAGE, NULL);
+		ft_error(IMAGE, NULL);
 		return (-1);
 	}
 	imgs->ea_text = mlx_load_png(scene->ea_path);
 	if (!imgs->ea_text)
 	{
-		// ft_error(IMAGE, NULL);
+		ft_error(IMAGE, NULL);
 		return (-1);
 	}
 	return (0);

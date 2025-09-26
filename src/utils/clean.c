@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 16:34:42 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 17:57:46 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:01:22 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_clean_images(t_game *info)
 void	ft_clean_map(t_game	*info)
 {
 	if (!info)
-		return;
+		return ;
 	if (info->scene)
 	{
 		if (info->scene->map)

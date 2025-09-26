@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 05:51:33 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 17:51:57 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:31:04 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * Initialize the essential information about the 3D world with safe default
  * values.
  */
-void    ft_init_scene(t_scene *scene)
+void	ft_init_scene(t_scene *scene)
 {
 	scene->no_path = NULL;
 	scene->so_path = NULL;

@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:21:10 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/23 17:56:02 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:29:27 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ void	ft_loop_handler(void *param)
 		ft_draw_col(info, WALL_H / coll.distance, i, &coll);
 		i++;
 	}
-}
-
-void	ft_init_game(t_game *info)
-{
-	ft_init_player(info->player, info);
-	mlx_key_hook(info->mlx, &ft_controls, info);
-	mlx_loop_hook(info->mlx, &ft_loop_handler, info);
-	mlx_loop(info->mlx);
 }
 
 int	ft_check_monitor(mlx_t *mlx)
@@ -80,18 +72,7 @@ int	main(int argc, char **argv)
 	t_img		imgs;
 	int			fd;
 
-	// Initialize info structure properly
-	info.scene = NULL;
-	info.player = NULL;
-	info.imgs = NULL;
-	info.mlx = NULL;
-
-	// Initialize imgs structure
-	imgs.no_text = NULL;
-	imgs.so_text = NULL;
-	imgs.we_text = NULL;
-	imgs.ea_text = NULL;
-
+	ft_init_structs(&info, &imgs);
 	fd = ft_arg_check(argc, argv);
 	if (fd < 0)
 		return (-1);

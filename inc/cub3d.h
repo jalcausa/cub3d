@@ -6,25 +6,27 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 17:35:29 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 16:35:29 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:36:06 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <unistd.h>    // open, close, read, write
-#include <fcntl.h>     // open
-#include <stdio.h>     // printf, perror
-#include <stdlib.h>    // malloc, free, exit
-#include <string.h>    // strerror
-#include <sys/time.h>  // gettimeofday
-#include <math.h>      // math functions
-#include <limits.h>    // INT_MAX
-#include <stdbool.h>   // bool, true, false
-# include "../libft/libft.h" // libft
-#include "../MLX42/include/MLX42/MLX42.h"       // MiniLibX
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <math.h>
+# include <limits.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 # define WIDTH 1080
 # define HEIGHT 720
@@ -95,7 +97,7 @@ typedef struct s_ray
 typedef struct s_coll
 {
 	t_coord			collision;
-	double			raylen;  
+	double			raylen;
 	double			distance;
 	int				txt;
 	mlx_texture_t	*texture;
@@ -154,13 +156,16 @@ void			ft_init_player(t_player *player, t_game *game);
 double			ft_deg_to_rad(double deg);
 
 // raycast.c
-t_coord			ft_first_step(t_ray *ray, char cross, double angle, t_game *info);
-t_coll			ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross);
-void			ft_init_ray(t_ray *ray, t_game *info, double angle, t_coord *mod);
+t_coord			ft_first_step(t_ray *ray, char cross,
+					double angle, t_game *info);
+t_coll			ft_cross_checker(t_ray *ray, t_coord step,
+					t_game *info, char cross);
+void			ft_init_ray(t_ray *ray, t_game *info,
+					double angle, t_coord *mod);
 t_coll			ft_ray_caster(t_game *info, float angle, t_coord *mod);
 double			ft_rayangle(int i, double angle);
-bool			ft_coll_checker(t_coord pos, t_ray *ray, t_game *info, char cross);
-
+bool			ft_coll_checker(t_coord pos, t_ray *ray,
+					t_game *info, char cross);
 
 // paint.c
 void			ft_draw_wall(t_game *info, t_coll *coll, int col, int j);
@@ -187,6 +192,15 @@ void			ft_mlx_errors(int err, char *str);
 int				ft_error(int err, char *str);
 
 // clean.c
-void	ft_clean_map(t_game	*info);
+void			ft_clean_map(t_game	*info);
+
+// main.c
+void			ft_loop_handler(void *param);
+int				ft_set_window(t_game *info);
+int				ft_check_monitor(mlx_t *mlx);
+
+// init.c
+void			ft_init_game(t_game *info);
+void			ft_init_structs(t_game *info, t_img *imgs);
 
 #endif

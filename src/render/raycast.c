@@ -3,41 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 12:55:01 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/09/17 13:33:27 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:33:58 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	ft_coll_checker(t_coord pos, t_ray *ray, t_game *info, char cross)
-{
-	char	**map;
-	int		j;
-	int		i;
-
-	map = info->scene->map;
-	j = (int)pos.y;
-	i = (int)pos.x;
-	if (cross == 'x' && ray->sgn.y == -1)
-		j--;
-	if (cross == 'y' && ray->sgn.x == -1)
-		i--;
-	if (i >= info->scene->len_x || j >= info->scene->len_y || i < 0 || j < 0)
-		return (true);
-	if (map[j][i] == '1')
-		return (true);
-	return (false);
-}
 
 t_coord	ft_first_step(t_ray *ray, char cross, double angle, t_game *info)
 {
 	t_coord	pos;
 	t_coord	first;
 
-	(void)info; // Suprimir advertencia de parámetro no usado
+	(void)info;
 	if (cross == 'x')
 	{
 		pos.y = (int)ray->origin.y;
@@ -63,7 +43,7 @@ t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross)
 {
 	t_coord	pos;
 	t_coll	coll;
-	
+
 	pos = ft_first_step(ray, cross, ray->angle, info);
 	while (1)
 	{
@@ -71,7 +51,7 @@ t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross)
 		{
 			coll.collision.x = pos.x;
 			coll.collision.y = pos.y;
-			coll.texture = NULL; // Inicializar explícitamente
+			coll.texture = NULL;
 			if (cross == 'y')
 				coll.txt = 1 * ray->sgn.x;
 			else
@@ -81,8 +61,8 @@ t_coll	ft_cross_checker(t_ray *ray, t_coord step, t_game *info, char cross)
 		pos.x += step.x;
 		pos.y += step.y;
 	}
-	coll.raylen = \
-	sqrt(pow(pos.x - ray->origin.x, 2) + pow(pos.y - ray->origin.y, 2));
+	coll.raylen = sqrt(pow(pos.x - ray->origin.x, 2)
+			+ pow(pos.y - ray->origin.y, 2));
 	coll.distance = coll.raylen * cos(ray->deltaang);
 	return (coll);
 }
@@ -120,28 +100,4 @@ t_coll	ft_ray_caster(t_game *info, float angle, t_coord *mod)
 		return (x_coll);
 	else
 		return (y_coll);
-}
-
-double	ft_rayangle(int i, double angle)
-{
-	int		sine;
-	int		cosine;
-	double	rayangle;
-
-	sine = (WIDTH / 2) / tan(ft_deg_to_rad(FOV / 2));
-	if (i < WIDTH / 2)
-	{
-		cosine = WIDTH / 2 - i;
-		rayangle = angle - atan2(cosine, sine);
-	}
-	else
-	{
-		cosine = i - WIDTH / 2;
-		rayangle = angle + atan2(cosine, sine);
-	}
-	if (rayangle < 0)
-		rayangle += (M_PI * 2);
-	if (rayangle > M_PI * 2)
-		rayangle -= (M_PI * 2);
-	return (rayangle * 180.0 / M_PI);
 }

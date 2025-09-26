@@ -6,7 +6,7 @@
 /*   By: yz <yz@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:42:07 by yz                #+#    #+#             */
-/*   Updated: 2025/09/23 12:01:36 by yz               ###   ########.fr       */
+/*   Updated: 2025/09/26 14:30:45 by yz               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	ft_color_check(char *color)
 	char	**rgb;
 
 	ret = 0;
-
 	if (ft_char_counter(color, ',') > 2)
 		return (-1);
 	rgb = ft_old_split(color, ',');
