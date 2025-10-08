@@ -1,7 +1,7 @@
-EA ./texturas/amapolas.png
-SO ./texturas/margaritas.png
-WE ./texturas/pensamientos.png
-NO ./texturas/rosas.png
+EA ./textures/bluestone.png
+SO ./textures/greystone.png
+WE ./textures/purplestone.png
+NO ./textures/redbrick.png
 
 F 40,120,60
 C 80,120,237
